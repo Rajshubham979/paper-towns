@@ -18,16 +18,21 @@ body {
   padding: 2em 5vw;
   transform: rotateZ(-5deg);
   box-shadow: 1px 15px 20px rgba(0, 0, 0, 0.5);
-  position: absolute;
+  position: absolute; /* Required for drag functionality */
   max-width: 90%;
+  cursor: grab; /* Visual cue for draggable elements */
 }
 
 .paper.heart {
-  position: relative;
+  position: absolute; /* Ensures it can be moved */
+  top: 50%; /* Initial position for center alignment */
+  left: 50%;
+  transform: translate(-50%, -50%) rotateZ(-5deg); /* Center the element and apply rotation */
   width: 20vw;
   height: 20vw;
   padding: 0;
-  border-radius: 50%;
+  border-radius: 5%; /* Circular appearance */
+  cursor: grab; /* Show draggable cursor */
 }
 
 .paper.image {
@@ -66,6 +71,11 @@ p {
   user-select: none;
 }
 
+/* Add drag effects for active state */
+.paper:active {
+  cursor: grabbing; /* Change cursor when dragging */
+}
+
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .paper {
@@ -83,6 +93,12 @@ p {
 
   p {
     font-size: 3vw;
+  }
+
+  .paper.heart {
+    width: 25vw;
+    height: 25vw;
+    transform: translate(-50%, -50%) rotateZ(-3deg); /* Adjust rotation for smaller screens */
   }
 }
 
@@ -102,5 +118,11 @@ p {
 
   p {
     font-size: 4vw;
+  }
+
+  .paper.heart {
+    width: 30vw;
+    height: 30vw;
+    transform: translate(-50%, -50%) rotateZ(-2deg); /* Adjust for smaller screens */
   }
 }

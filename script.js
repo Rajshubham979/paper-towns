@@ -112,9 +112,15 @@ class Paper {
   }
 }
 
+// Initialize all `.paper` elements except `.paper.heart`
 const papers = Array.from(document.querySelectorAll('.paper'));
 
 papers.forEach((paper) => {
+  if (paper.classList.contains('heart')) {
+    console.log('Skipping .paper.heart'); // Debugging log
+    return; // Skip initialization for .paper.heart
+  }
+
   const p = new Paper();
   p.init(paper);
 });
