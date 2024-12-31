@@ -112,16 +112,38 @@ class Paper {
   }
 }
 
+// Initialize all `.paper` elements except `.paper.heart`
 const papers = Array.from(document.querySelectorAll('.paper'));
 
 papers.forEach((paper) => {
+  if (paper.classList.contains('heart')) {
+    console.log('Skipping .paper.heart'); // Debugging log
+    return; // Skip initialization for .paper.heart
+  }
+
   const p = new Paper();
   p.init(paper);
 });
 
 // Automatically play music when the page loads
 window.onload = () => {
-  document.getElementById('bgm').play().catch((error) => {
+  const bgm = document.getElementById('bgm');
+
+  // Try autoplay on page load
+  bgm.play().catch((error) => {
     console.log('Autoplay error:', error);
+
+    // Add user interaction fallback
+    document.addEventListener('click', () => {
+      bgm.play().catch((error) => {
+        console.log('Error playing audio after user interaction:', error);
+      });
+    });
+
+    document.addEventListener('touchstart', () => {
+      bgm.play().catch((error) => {
+        console.log('Error playing audio after touch interaction:', error);
+      });
+    });
   });
 };
