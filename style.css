@@ -51,7 +51,7 @@ img {
 
 .paper.heart::after {
   content: "";
-  background-image: url('heart.png?v=1.0');
+  background-image: url('heart.gif?v=1.0');
   width: 100%;
   height: 100%;
   position: absolute;
