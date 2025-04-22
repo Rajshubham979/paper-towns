@@ -1,0 +1,24 @@
+{
+  "name": "paper-towns",
+  "version": "1.0.0",
+  "description": "link mobile.js instead of script.js in index.html to work in mobile.",
+  "main": "mobile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rajshubham979/paper-towns.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rajshubham979/paper-towns/issues"
+  },
+  "homepage": "https://github.com/Rajshubham979/paper-towns#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

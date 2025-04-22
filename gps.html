@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Location Logger</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    .output {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Live Location Logger</h1>
+  <div class="output" id="output">Fetching your location...</div>
+
+  <script>
+    window.onload = () => {
+      const output = document.getElementById('output');
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            output.innerHTML = `
+              <p><strong>Latitude:</strong> ${latitude}</p>
+              <p><strong>Longitude:</strong> ${longitude}</p>
+              <p><a href="https://www.google.com/maps?q=${latitude},${longitude}" target="_blank">View on Google Maps</a></p>
+            `;
+
+            // Send location data to backend
+            fetch('http://localhost:3000/location', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ latitude, longitude })
+            })
+            .then(response => response.json())
+            .then(data => console.log('Data saved:', data))
+            .catch(error => console.error('Error:', error));
+          },
+          (error) => {
+            output.textContent = `Error: ${error.message}`;
+          }
+        );
+      } else {
+        output.textContent = "Geolocation is not supported by your browser.";
+      }
+    };
+  </script>
+</body>
+</html>
